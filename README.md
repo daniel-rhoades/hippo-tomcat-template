@@ -63,7 +63,7 @@ Obviously, just replace the placeholder `<my-other-secret-pw>` with a password o
 
 ### Create an environment setup script
 
-When running the hippo-tomcat-template Docker image you will need to specify the database connection properties.  These can be given either as environment properties passed to the container or specified in an environments script.
+When running the `danielrhoades/hippo-tomcat-template` Docker image you will need to specify the database connection properties.  These can be given either as environment properties passed to the container or specified in an environments script.
 
 If you are using another Docker container to run your database (like the previous MySQL example) then it gets a bit easier, because if you link the containers (see next section) then Docker will inject the database IP address and port into the Hippo container for you using the variables:
 
@@ -112,7 +112,7 @@ $ docker run \
     --volume /tmp/hippo-environment:/opt/cms/environment \
     -e HIPPO_CONTENTSTORE_USERNAME="gogreen" \
     -e HIPPO_CONTENTSTORE_PASSWORD="<my-other-secret-pw>" \
-    -e HIPPO_CONTENTSTORE_URL="jdbc:mysql://$MYSQL_PORT_3306_TCP_ADDR:$MYSQL_PORT_3306_TCP_PORT/gogreen?characterEncoding=utf8" \
+    -e HIPPO_CONTENTSTORE_URL="jdbc:mysql://\$MYSQL_PORT_3306_TCP_ADDR:\$MYSQL_PORT_3306_TCP_PORT/gogreen?characterEncoding=utf8" \
     --link gogreen-mysql:mysql \
     danielrhoades/hippo-tomcat-template
 ```
@@ -129,18 +129,20 @@ If you run into any issues accessing the site, ensure the Hippo repository has b
 
 If you are interested in the details.  This project is made up of the following key components:
  
-* Dockerfile which starts the build of the Docker image
-* Ansible playbook which configures the image to do the things it needs
+* `Dockerfile` which starts the build of the Docker image
+* Ansible `playbook.yml` which configures the image to do the things it needs, along with `requirements.yml` which lists the dependant roles that will be installed when building the Docker image
 
-Although the Ansible playbook in the project is used to configure a Docker image, it knows nothing about Docker itself and could easily be reused to configure any system.
+Although the Ansible playbook in the project is used to configure a Docker image, it knows nothing about Docker itself and could easily be reused to configure any machine to be running Hippo.
 
-The Ansible playbook (ansible/hippo-tomcat.yml) will configure a machine with:
+The Ansible playbook (`playbook.yml`) will configure a machine with:
 
 * Oracle JDK 1.8.x (using the [williamyeh.oracle-java](https://github.com/William-Yeh/ansible-oracle-java) role)
 * Tomcat 8.0.x (using the [daniel-rhoades/tomcat-role](https://github.com/daniel-rhoades/tomcat-role) role)
-* Configure Tomcat for use with the [Hippo CMS](http://onehippo.org) (using the daniel-rhoades/hippo-tomcat role)
+* Configure Tomcat for use with the [Hippo CMS](http://onehippo.org) (using the [daniel-rhoades/hippo-tomcat](https://github.com/daniel-rhoades/hippo-tomcat) role)
 
-A Dockerfile is used to execute the playbook, by doing this the end result is a Docker image configured as above.
+This playbook is very simple, the real complexity is held in the previously mentioned roles.
+
+A `Dockerfile` is used to execute the playbook, by doing this the end result is a Docker image configured as above.
  
 To build your own Docker image, check-out this project from GitHub, install Docker, "cd" into the directory and run the following command:
 
