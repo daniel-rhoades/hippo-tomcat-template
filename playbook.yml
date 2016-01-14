@@ -1,0 +1,14 @@
+---
+- name: Hippo CMS | Build a configurable, templated install of Hippo on Tomcat
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  sudo: True
+
+  vars:
+    ansible_pkg_mgr: apt
+
+  roles:
+    - williamyeh.oracle-java
+    - daniel-rhoades.tomcat
+    - daniel-rhoades.hippo-tomcat
