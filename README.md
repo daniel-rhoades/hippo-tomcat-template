@@ -44,7 +44,7 @@ $ docker run --name gogreen-mysql -e MYSQL_ROOT_PASSWORD=<my-secret-pw> -d mysql
 $ docker exec -it gogreen-mysql bash
 ```
 
-Obviously, just replace the placeholder `<my-secret-pw>` with a password of your choice.
+Obviously, just replace the placeholder `<my-secret-pw>` with a password of your choice, and optionally change the name of the container from `gogreen-mysql`
 
 That will have a MySQL instance running in the background and have given you a bash shell to access it, you can then run:
 
@@ -59,7 +59,7 @@ mysql> flush privileges;
 ...
 ```
 
-Obviously, just replace the placeholder `<my-other-secret-pw>` with a password of your choice.
+Obviously, just replace the placeholder `<my-other-secret-pw>` with a password of your choice, and optionally change the database name and username.
 
 ### Create an environment setup script
 
@@ -67,8 +67,8 @@ When running the hippo-tomcat-template Docker image you will need to specify the
 
 If you are using another Docker container to run your database (like the previous MySQL example) then it gets a bit easier, because if you link the containers (see next section) then Docker will inject the database IP address and port into the Hippo container for you using the variables:
 
-* MYSQL_PORT_3306_TCP_ADDR
-* MYSQL_PORT_3306_TCP_PORT
+* `MYSQL_PORT_3306_TCP_ADDR`
+* `MYSQL_PORT_3306_TCP_PORT`
 
 Environment properties:
 
@@ -165,7 +165,7 @@ $ docker run \
     
 $ cp gogreen-0.1.0-SNAPSHOT-distribution-site.tar.gz /tmp/hippo-distributions/site
 $ docker run \
-    --publish 8080:8080 \
+    --publish 8081:8080 \
     --volume /tmp/hippo-distributions/site:/opt/cms/distributions \
     --volume /tmp/hippo-environment:/opt/cms/environment \
     --link gogreen-mysql:mysql \
