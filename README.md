@@ -6,6 +6,8 @@ The image should comply (mostly) with the [recommended setup](http://www.onehipp
 
 You can also find a pre-built version of this image on Docker Hub under [danielrhoades/hippo-tomcat-template](https://hub.docker.com/r/danielrhoades/hippo-tomcat-template/), where it can simply be obtained by running `$ docker pull danielrhoades/hippo-tomcat-template`
 
+The Hippo distribution along with environment specific configuration (e.g. database connection details) are passed to the container during start-up, see the quick start guide below for more information.
+
 ## Prerequisites
 
 * Hippo is a Java-based CMS, Hippo project are built using Maven.  So if you need to build a Hippo project make sure you have an environment setup with Java and Maven, check out Hippo's documentation on [getting started](http://www.onehippo.org/trails/getting-started/prerequisites.html) for more information;
@@ -16,7 +18,7 @@ You can also find a pre-built version of this image on Docker Hub under [danielr
 1. Build a Hippo project;
 2. Setup a Hippo Content Repository;
 3. Create a environment properties file to store the Content Repository database connection information;
-4. Start the hippo-tomcat-template container with appropriate parameters.
+4. Start a Docker container using the `danielrhoades/hippo-tomcat-template` image with appropriate parameters.
 
 ### Build a Hippo project
 
@@ -95,7 +97,7 @@ $ docker run \
     --publish 8080:8080 \
     --volume /tmp/hippo-distributions:/opt/cms/distributions \
     --volume /tmp/hippo-environment:/opt/cms/environment \
-    --link gogreen-mysql:mysql
+    --link gogreen-mysql:mysql \
     danielrhoades/hippo-tomcat-template
 ```
 
@@ -108,10 +110,10 @@ $ docker run \
     --publish 8080:8080 \
     --volume /tmp/hippo-distributions:/opt/cms/distributions \
     --volume /tmp/hippo-environment:/opt/cms/environment \
-    -e HIPPO_CONTENTSTORE_USERNAME="gogreen"
-    -e HIPPO_CONTENTSTORE_PASSWORD="<my-other-secret-pw>"
-    -e HIPPO_CONTENTSTORE_URL="jdbc:mysql://$MYSQL_PORT_3306_TCP_ADDR:$MYSQL_PORT_3306_TCP_PORT/gogreen?characterEncoding=utf8"
-    --link gogreen-mysql:mysql
+    -e HIPPO_CONTENTSTORE_USERNAME="gogreen" \
+    -e HIPPO_CONTENTSTORE_PASSWORD="<my-other-secret-pw>" \
+    -e HIPPO_CONTENTSTORE_URL="jdbc:mysql://$MYSQL_PORT_3306_TCP_ADDR:$MYSQL_PORT_3306_TCP_PORT/gogreen?characterEncoding=utf8" \
+    --link gogreen-mysql:mysql \
     danielrhoades/hippo-tomcat-template
 ```
 
@@ -134,8 +136,8 @@ Although the Ansible playbook in the project is used to configure a Docker image
 
 The Ansible playbook (ansible/hippo-tomcat.yml) will configure a machine with:
 
-* Oracle JDK 1.8.x (using the williamyeh.oracle-java role)
-* Tomcat 8.0.x (using the daniel-rhoades/tomcat role)
+* Oracle JDK 1.8.x (using the [williamyeh.oracle-java](https://github.com/William-Yeh/ansible-oracle-java) role)
+* Tomcat 8.0.x (using the [daniel-rhoades/tomcat-role](https://github.com/daniel-rhoades/tomcat-role) role)
 * Configure Tomcat for use with the [Hippo CMS](http://onehippo.org) (using the daniel-rhoades/hippo-tomcat role)
 
 A Dockerfile is used to execute the playbook, by doing this the end result is a Docker image configured as above.
@@ -158,7 +160,7 @@ $ docker run \
     --publish 8080:8080 \
     --volume /tmp/hippo-distributions/cms:/opt/cms/distributions \
     --volume /tmp/hippo-environment:/opt/cms/environment \
-    --link gogreen-mysql:mysql
+    --link gogreen-mysql:mysql \
     danielrhoades/hippo-tomcat-template
     
 $ cp gogreen-0.1.0-SNAPSHOT-distribution-site.tar.gz /tmp/hippo-distributions/site
@@ -166,7 +168,7 @@ $ docker run \
     --publish 8080:8080 \
     --volume /tmp/hippo-distributions/site:/opt/cms/distributions \
     --volume /tmp/hippo-environment:/opt/cms/environment \
-    --link gogreen-mysql:mysql
+    --link gogreen-mysql:mysql \
     danielrhoades/hippo-tomcat-template
 ```
 
