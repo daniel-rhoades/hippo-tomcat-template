@@ -4,7 +4,7 @@ Configurable [Docker](http://docker.io) image to run a Hippo CMS distribution.  
 
 The image should comply (mostly) with the [recommended setup](http://www.onehippo.org/library/enterprise/installation-and-configuration/linux-installation-manual.html) outlined in Hippo's documentation.
 
-You can also find a pre-built version of this image on Docker Hub under [daniel-rhoades/hippo-tomcat-template](https://hub.docker.com/r/daniel-rhoades/hippo-tomcat-template/), where it can simply be obtained by running `$ docker pull daniel-rhoades/hippo-tomcat-template`
+You can also find a pre-built version of this image on Docker Hub under [danielrhoades/hippo-tomcat-template](https://hub.docker.com/r/danielrhoades/hippo-tomcat-template/), where it can simply be obtained by running `$ docker pull danielrhoades/hippo-tomcat-template`
 
 ## Prerequisites
 
@@ -96,7 +96,7 @@ $ docker run \
     --volume /tmp/hippo-distributions:/opt/cms/distributions \
     --volume /tmp/hippo-environment:/opt/cms/environment \
     --link gogreen-mysql:mysql
-    daniel-rhoades/hippo-tomcat-template
+    danielrhoades/hippo-tomcat-template
 ```
 
 All `tar.gz` archives found in the `/opt/cms/distributions` mount will be extracted into Tomcat base (CATALINA_BASE) within `webapps` and `shared` directories, e.g. it will run `$ tar zxf <distribution>.tar.gz webapps shared`.
@@ -112,7 +112,7 @@ $ docker run \
     -e HIPPO_CONTENTSTORE_PASSWORD="<my-other-secret-pw>"
     -e HIPPO_CONTENTSTORE_URL="jdbc:mysql://$MYSQL_PORT_3306_TCP_ADDR:$MYSQL_PORT_3306_TCP_PORT/gogreen?characterEncoding=utf8"
     --link gogreen-mysql:mysql
-    daniel-rhoades/hippo-tomcat-template
+    danielrhoades/hippo-tomcat-template
 ```
 
 You can also pass the environment variables in via `$ docker run --env-file`.
@@ -142,7 +142,7 @@ A Dockerfile is used to execute the playbook, by doing this the end result is a 
  
 To build your own Docker image, check-out this project from GitHub, install Docker, "cd" into the directory and run the following command:
 
-* `$ docker build -t daniel-rhoades/hippo-tomcat-template .`
+* `$ docker build -t danielrhoades/hippo-tomcat-template .`
 
 ## Separate out CMS and HST
 
@@ -150,7 +150,7 @@ By default the Hippo distribution combines both the CMS (Content Authoring) and 
 
 A Hippo maven project can easily be modified to add an additional build profile to achieve this separation, follow the [Separate HST Deployment Model guide](http://www.onehippo.org/library/enterprise/installation-and-configuration/separate-hst-deployment-model.html) to modify your own project.
 
-When it comes to running the `daniel-rhoades/hippo-tomcat-template` Docker image, the process is exactly the same, you just copy the required distribution to the particular Docker container you need by placing it in the mount (e.g. `--volume /tmp/hippo-distributions:/opt/cms/distributions`).  If you are running them on the same host, just remember to start the Docker containers on different ports, for example:
+When it comes to running the `danielrhoades/hippo-tomcat-template` Docker image, the process is exactly the same, you just copy the required distribution to the particular Docker container you need by placing it in the mount (e.g. `--volume /tmp/hippo-distributions:/opt/cms/distributions`).  If you are running them on the same host, just remember to start the Docker containers on different ports, for example:
 
 ```
 $ cp gogreen-0.1.0-SNAPSHOT-distribution-cms.tar.gz /tmp/hippo-distributions/cms
@@ -159,7 +159,7 @@ $ docker run \
     --volume /tmp/hippo-distributions/cms:/opt/cms/distributions \
     --volume /tmp/hippo-environment:/opt/cms/environment \
     --link gogreen-mysql:mysql
-    daniel-rhoades/hippo-tomcat-template
+    danielrhoades/hippo-tomcat-template
     
 $ cp gogreen-0.1.0-SNAPSHOT-distribution-site.tar.gz /tmp/hippo-distributions/site
 $ docker run \
@@ -167,7 +167,7 @@ $ docker run \
     --volume /tmp/hippo-distributions/site:/opt/cms/distributions \
     --volume /tmp/hippo-environment:/opt/cms/environment \
     --link gogreen-mysql:mysql
-    daniel-rhoades/hippo-tomcat-template
+    danielrhoades/hippo-tomcat-template
 ```
 
 In both example cases they use the same environments file and link to the same MySQL Docker container.
