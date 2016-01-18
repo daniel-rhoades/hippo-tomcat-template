@@ -1,5 +1,7 @@
 # Docker - Hippo on Tomcat Template
 
+[![Circle CI](https://circleci.com/gh/daniel-rhoades/hippo-tomcat-template.svg?style=svg&circle-token=62f2ad9ad3771b25bc5e2171d617b6fa234b9950)](https://circleci.com/gh/daniel-rhoades/hippo-tomcat-template)
+
 Configurable [Docker](http://docker.io) image to run a Hippo CMS distribution.  The Docker image is just the result of applying a number configurations as part of an Ansible playbook.
 
 The image should comply (mostly) with the [recommended setup](http://www.onehippo.org/library/enterprise/installation-and-configuration/linux-installation-manual.html) outlined in Hippo's documentation.
