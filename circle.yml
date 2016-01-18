@@ -10,8 +10,8 @@ test:
     - sudo service memcached stop
     - sudo service mongodb stop
     - sudo service postgresql stop
-    - sudo service rabbitmq stop
-    - sudo service redis stop
+    - sudo service rabbitmq-server stop
+    - sudo service redis-server stop
     - sudo service zookeeper stop
 
     # Start a MySQL instance to host the Content Store
