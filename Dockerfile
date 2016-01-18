@@ -16,14 +16,6 @@
 
 FROM williamyeh/ansible:ubuntu14.04-onbuild
 
-#ENV PLAYBOOK ansible/hippo-tomcat-template.yml
-
-#ARG ansible_extra_vars
-
-#RUN ansible-galaxy install williamyeh.oracle-java
-#RUN ansible-galaxy install daniel-rhoades.tomcat
-#RUN ansible-galaxy install daniel-rhoades.hippo-tomcat
-
 RUN ansible-playbook-wrapper
 
 EXPOSE 8080

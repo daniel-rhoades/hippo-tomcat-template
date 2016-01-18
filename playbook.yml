@@ -2,7 +2,6 @@
 - name: Hippo CMS | Build a configurable, templated install of Hippo on Tomcat
   hosts: localhost
   connection: local
-  gather_facts: false
   sudo: True
 
   vars:

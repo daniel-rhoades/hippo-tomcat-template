@@ -8,17 +8,31 @@ You can also find a pre-built version of this image on Docker Hub under [danielr
 
 The Hippo distribution along with environment specific configuration (e.g. database connection details) are passed to the container during start-up, see the quick start guide below for more information.
 
-## Prerequisites
+## Super quick start
 
-* Hippo is a Java-based CMS, Hippo project are built using Maven.  So if you need to build a Hippo project make sure you have an environment setup with Java and Maven, check out Hippo's documentation on [getting started](http://www.onehippo.org/trails/getting-started/prerequisites.html) for more information;
-* Setup Docker on your target machine (could easily be your localhost), the Docker website has an [installation guide](https://docs.docker.com/engine/installation/).
+1. [Install Vagrant](https://docs.vagrantup.com/v2/installation/index.html);
+2. [Clone](https://help.github.com/articles/cloning-a-repository/) this project from GitHub;
+3. In the project directory run: `$ vagrant up`
+
+You should now be able to login to Hippo, the default username/password for Hippo is admin/admin:
+
+* http://localhost:8080/cms
+* http://localhost:8081/site
+
+The CMS component is where you administer the website and the HST ("site") is the public facing side.
 
 ## Quick start
 
+0. Prerequisites
 1. Build a Hippo project;
 2. Setup a Hippo Content Repository;
 3. Create a environment properties file to store the Content Repository database connection information;
 4. Start a Docker container using the `danielrhoades/hippo-tomcat-template` image with appropriate parameters.
+
+### Prerequisites
+
+* Hippo is a Java-based CMS, Hippo project are built using Maven.  So if you need to build a Hippo project make sure you have an environment setup with Java and Maven, check out Hippo's documentation on [getting started](http://www.onehippo.org/trails/getting-started/prerequisites.html) for more information;
+* Setup Docker on your target machine (could easily be your localhost), the Docker website has an [installation guide](https://docs.docker.com/engine/installation/).
 
 ### Build a Hippo project
 

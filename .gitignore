@@ -2,3 +2,6 @@
 .idea/
 *.iml
 /out/
+
+# Vagrant
+.vagrant/
