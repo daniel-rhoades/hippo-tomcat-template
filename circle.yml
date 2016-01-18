@@ -7,10 +7,10 @@ test:
     - sudo service mysql stop
     - docker run -d -p 3306:3306 --name gogreen-mysql -e MYSQL_ROOT_PASSWORD=password --volume /home/ubuntu/hippo-tomcat-role/tests/database-init-scripts:/docker-entrypoint-initdb.d:ro mysql:latest
 
-    - mkdir /tmp/hippo-distributions/cms
+    - mkdir -p /tmp/hippo-distributions/cms
     - wget https://github.com/daniel-rhoades/hippo-gogreen/releases/download/v0.1/gogreen-0.1.0-SNAPSHOT-cms-distribution.tar.gz -O /tmp/hippo-distributions/cms/gogreen-0.1.0-SNAPSHOT-cms-distribution.tar.gz
 
-    - mkdir /tmp/hippo-distributions/site
+    - mkdir -p /tmp/hippo-distributions/site
     - wget https://github.com/daniel-rhoades/hippo-gogreen/releases/download/v0.1/gogreen-0.1.0-SNAPSHOT-site-distribution.tar.gz -O /tmp/hippo-distributions/site/gogreen-0.1.0-SNAPSHOT-site-distribution.tar.gz
   post:
     - docker build -t danielrhoades/hippo-tomcat-template .
