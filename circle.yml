@@ -15,7 +15,7 @@ test:
     - sudo service zookeeper stop
 
     # Start a MySQL instance to host the Content Store
-    - docker run -d -p 3306:3306 --name gogreen-mysql -e MYSQL_ROOT_PASSWORD=password --volume /home/ubuntu/hippo-tomcat-role/tests/database-init-scripts:/docker-entrypoint-initdb.d:ro mysql:latest
+    - docker run -d -p 3306:3306 --name gogreen-mysql -e MYSQL_ROOT_PASSWORD=password --volume /home/ubuntu/hippo-tomcat-template/tests/database-init-scripts:/docker-entrypoint-initdb.d:ro mysql:latest
 
     # Download the GoGreen project CMS component
     - mkdir -p /tmp/hippo-distributions/cms
