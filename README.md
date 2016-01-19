@@ -10,6 +10,8 @@ You can also find a pre-built version of this image on Docker Hub under [danielr
 
 The Hippo distribution along with environment specific configuration (e.g. database connection details) are passed to the container during start-up, see the quick start guide below for more information.
 
+If you want to use this project as a template for your own deployment I would recommend forking it so you can receive patch updates more easily.  Because the only artefact from this project is a configurable Docker image, in most cases you should be fine with just using (or layering upon) the `danielrhoades/hippo-tomcat-template` already in Docker Hub.
+
 ## Super quick start
 
 1. [Install Vagrant](https://docs.vagrantup.com/v2/installation/index.html);
@@ -23,7 +25,16 @@ You should now be able to login to Hippo, the default username/password for Hipp
 
 The CMS component is where you administer the website and the HST ("site") is the public facing side.
 
+If you get any errors during provisioning, then it's usually because some dependency (usually Oracle JDK) failed to download, just run:
+
+* `$ vagrant reload`
+* `$ vagrant provision`
+
+That will re-provision your environment and should clear up any errors.
+
 ## Quick start
+
+If you want to deploy on your own environment (instead of Vagrant), then follow the following steps:
 
 0. Prerequisites
 1. Build a Hippo project;
